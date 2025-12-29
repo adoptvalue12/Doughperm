@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #e5e7eb;
+}
+
+header {
+  background: rgba(37,99,235,0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 { margin:0; font-size:2rem; }
+
+.container { max-width:1000px; margin:auto; padding:20px; }
+
+input {
+  width: 100%; padding:10px; margin:10px 0; border-radius:8px; border:none;
+}
+
+button { padding:5px 10px; border:none; border-radius:6px; background:#2563eb; color:white; cursor:pointer; }
+button:hover { background:#1e40af; }
+
+.card { background: rgba(17,24,39,0.9); border-radius:12px; padding:20px; margin-top:20px; box-shadow:0 10px 25px rgba(0,0,0,0.4); }
+
+table { width:100%; border-collapse: collapse; }
+th, td { padding:10px; text-align:center; }
+th { background: #1f2933; color: #93c5fd; }
+tr:hover { background: #1e293b; }
+
+.mythic { color:#facc15; font-weight:bold; }
+.legendary { color:#a78bfa; }
+.common { color:#60a5fa; }
+
+.trade-columns { display:flex; flex-wrap:wrap; justify-content:space-between; }
+.trade-column { flex: 1; min-width:140px; background:#111827; margin:5px; padding:10px; border-radius:8px; }
+
+footer { margin-top:40px; font-size:12px; text-align:center; color:#9ca3af; }
+
+@media (max-width:600px) {
+  .trade-columns { flex-direction:column; }
+}
