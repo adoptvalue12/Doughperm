@@ -4,7 +4,52 @@
 <meta charset="UTF-8">
 <title>DoughPerm</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #e5e7eb;
+}
+
+header {
+  background: rgba(37,99,235,0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 { margin:0; font-size:2rem; }
+
+.container { max-width:1000px; margin:auto; padding:20px; }
+
+input {
+  width: 100%; padding:10px; margin:10px 0; border-radius:8px; border:none;
+}
+
+button { padding:5px 10px; border:none; border-radius:6px; background:#2563eb; color:white; cursor:pointer; }
+button:hover { background:#1e40af; }
+
+.card { background: rgba(17,24,39,0.9); border-radius:12px; padding:20px; margin-top:20px; box-shadow:0 10px 25px rgba(0,0,0,0.4); }
+
+table { width:100%; border-collapse: collapse; }
+th, td { padding:10px; text-align:center; }
+th { background: #1f2933; color: #93c5fd; }
+tr:hover { background: #1e293b; }
+
+.mythic { color:#facc15; font-weight:bold; }
+.legendary { color:#a78bfa; }
+.common { color:#60a5fa; }
+
+.trade-columns { display:flex; flex-wrap:wrap; justify-content:space-between; }
+.trade-column { flex: 1; min-width:140px; background:#111827; margin:5px; padding:10px; border-radius:8px; }
+
+footer { margin-top:40px; font-size:12px; text-align:center; color:#9ca3af; }
+
+@media (max-width:600px) {
+  .trade-columns { flex-direction:column; }
+}
+</style>
 </head>
 <body>
 
@@ -31,19 +76,19 @@
       <!-- Exemple fruits, tu peux ajouter tous les autres -->
       <tr>
         <td class="mythic">Dragon</td><td>1275000000</td><td>2805000000</td>
-        <td><button onclick="addTrade('Dragon',1275000000,2805000000,'give')">+</button></td>
+        <td><button onclick="addTrade('Dragon',1275000000,'give')">+</button></td>
       </tr>
       <tr>
         <td class="mythic">Kitsune</td><td>255000000</td><td>2040000000</td>
-        <td><button onclick="addTrade('Kitsune',255000000,2040000000,'give')">+</button></td>
+        <td><button onclick="addTrade('Kitsune',255000000,'give')">+</button></td>
       </tr>
       <tr>
         <td class="legendary">Buddha</td><td>8000000</td><td>685000000</td>
-        <td><button onclick="addTrade('Buddha',8000000,685000000,'give')">+</button></td>
+        <td><button onclick="addTrade('Buddha',8000000,'give')">+</button></td>
       </tr>
       <tr>
         <td class="common">Ice</td><td>550000</td><td>310000000</td>
-        <td><button onclick="addTrade('Ice',550000,310000000,'give')">+</button></td>
+        <td><button onclick="addTrade('Ice',550000,'give')">+</button></td>
       </tr>
     </table>
   </div>
@@ -71,6 +116,39 @@
 
 </div>
 
-<script src="script.js"></script>
+<script>
+// Recherche des fruits
+document.getElementById("search").addEventListener("keyup", function(){
+  let value = this.value.toLowerCase();
+  let rows = document.querySelectorAll("#fruitTable tr");
+  rows.forEach((row,index)=>{if(index===0) return; row.style.display=row.textContent.toLowerCase().includes(value)?'':'none';});
+});
+
+// Trade Calculator
+let giveList = [];
+let receiveList = [];
+
+function addTrade(name,val,side){
+  let list = (side==='give')?giveList:receiveList;
+  list.push({name,val});
+  updateTradeDisplay();
+}
+
+function updateTradeDisplay(){
+  let giveUl = document.getElementById('giveList');
+  let receiveUl = document.getElementById('receiveList');
+  giveUl.innerHTML = ''; receiveUl.innerHTML='';
+  let sumGive=0,sumReceive=0;
+  giveList.forEach(f=>{giveUl.innerHTML+='<li>'+f.name+': '+f.val.toLocaleString()+'</li>'; sumGive+=f.val;});
+  receiveList.forEach(f=>{receiveUl.innerHTML+='<li>'+f.name+': '+f.val.toLocaleString()+'</li>'; sumReceive+=f.val;});
+  let diff = sumReceive - sumGive;
+  let text = 'Différence totale: '+diff.toLocaleString()+' ';
+  if(diff>0) text+='✅ Bon trade';
+  else if(diff<0) text+='⚠️ Mauvais trade';
+  else text+='⚖️ Trade équilibré';
+  document.getElementById('diffText').textContent=text;
+}
+</script>
+
 </body>
 </html>
