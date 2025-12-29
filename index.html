@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>DoughPerm</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🍍 DoughPerm</h1>
+  <p>Valeurs communautaires & trade équilibrés Blox Fruits</p>
+</header>
+
+<div class="container">
+
+  <!-- RECHERCHE -->
+  <input type="text" id="search" placeholder="🔍 Rechercher un fruit...">
+
+  <!-- TABLEAU DES FRUITS -->
+  <div class="card">
+    <h2>📊 Tous les Fruits</h2>
+    <table id="fruitTable">
+      <tr>
+        <th>Fruit</th>
+        <th>Physique 💎</th>
+        <th>Permanent 💎</th>
+        <th>Ajouter ➕</th>
+      </tr>
+      <!-- Exemple fruits, tu peux ajouter tous les autres -->
+      <tr>
+        <td class="mythic">Dragon</td><td>1275000000</td><td>2805000000</td>
+        <td><button onclick="addTrade('Dragon',1275000000,2805000000,'give')">+</button></td>
+      </tr>
+      <tr>
+        <td class="mythic">Kitsune</td><td>255000000</td><td>2040000000</td>
+        <td><button onclick="addTrade('Kitsune',255000000,2040000000,'give')">+</button></td>
+      </tr>
+      <tr>
+        <td class="legendary">Buddha</td><td>8000000</td><td>685000000</td>
+        <td><button onclick="addTrade('Buddha',8000000,685000000,'give')">+</button></td>
+      </tr>
+      <tr>
+        <td class="common">Ice</td><td>550000</td><td>310000000</td>
+        <td><button onclick="addTrade('Ice',550000,310000000,'give')">+</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- CALCULATEUR DE TRADE -->
+  <div class="card">
+    <h2>⚖️ Trade Calculator</h2>
+    <div class="trade-columns">
+      <div class="trade-column">
+        <h3>Tu Donnes</h3>
+        <ul id="giveList"></ul>
+      </div>
+      <div class="trade-column">
+        <h3>Tu Reçois</h3>
+        <ul id="receiveList"></ul>
+      </div>
+    </div>
+    <p id="diffText">Différence totale: 0</p>
+  </div>
+
+  <footer>
+    <p>Les valeurs sont basées sur les tendances de la communauté Blox Fruits.<br>
+    Ce site est indépendant et n’est pas affilié à Roblox ou à des sites officiels.</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
